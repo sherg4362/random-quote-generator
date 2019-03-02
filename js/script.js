@@ -21,7 +21,8 @@ const quotes = [
   {
     quote: "If opportunity doesn't knock, build a door.",
     source: "Milton Berle",
-    citation: 1955
+    citation: "Interview",
+    year: 1955
   },
   {
     quote: "Hardships often prepare ordinary people for an extraordinary destiny.",
@@ -46,7 +47,7 @@ function getRandomQuote() {
   return quotes[Math.floor(Math.random() * quotes.length)];
 };
 
-getRandomQuote();
+//getRandomQuote();
 
 
 /***
@@ -60,17 +61,22 @@ getRandomQuote();
 ***/
 
 function printQuote() {
+
   let quoteObj = getRandomQuote();
   let newHTML = '';
-  if (quoteObj.quote && quoteObj.source && quoteObj.citation && quoteObj.year) {
-    newHTML += `<p class="quote">${quoteObj.quote}</p><p class="source">${quoteObj.source}<span class="citation">${quoteObj.citation}</span><span class="year">${quoteObj.year}</span></p>`;
+  if (quoteObj.quote) {
+    newHTML += `<p class="quote">${quoteObj.quote}</p>`;
   }
-  if (quoteObj.quote && quoteObj.source && quoteObj.citation) {
-    newHTML += `<p class="source">${quoteObj.source}</p><p class="source">${quoteObj.source}<span class="citation">${quoteObj.citation}</span></p>`;
-  }
-  if (quoteObj.citation) {
+  if (quoteObj.source) {
 
+    if (quoteObj.citation && quoteObj.year) {
+      newHTML += `<p class="source">${quoteObj.source}
+      <span class="citation">${quoteObj.citation}</span>
+      <span class="year">${quoteObj.year}</span>
+      </p>`;
+    }
   }
+
   console.log(newHTML);
 };
 
