@@ -47,10 +47,20 @@ const quotes = [
   }
 ];
 
+// Random Number Function
+function createRandomNumber(max) {
+  return Math.floor(Math.random() * max);
+}
+
 // Generates a random number, returns a quote from array
 function getRandomQuote() {
-  return quotes[Math.floor(Math.random() * quotes.length)];
+  return quotes[createRandomNumber(quotes.length)];
 };
+
+function changeBackgroundColor() {
+  const body = document.body;
+  body.style.backgroundColor = `rgb(${createRandomNumber(255)}, ${createRandomNumber(255)}, ${createRandomNumber(255)})`;
+}
 
 // Builds HTML String
 function printQuote() {
@@ -79,9 +89,8 @@ function printQuote() {
 
   const quoteBox = document.getElementById('quote-box');
   quoteBox.innerHTML = newHTML;
+  changeBackgroundColor();
 };
-
-document.body.style.backgroundColor = rgb(Math.floor(Math.random() * quotes.length), Math.floor(Math.random() * quotes.length), Math.floor(Math.random() * quotes.length));
 
 /***
   When the "Show another quote" button is clicked, the event listener
