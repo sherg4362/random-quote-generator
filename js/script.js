@@ -22,23 +22,28 @@ const quotes = [
     quote: "If opportunity doesn't knock, build a door.",
     source: "Milton Berle",
     citation: "Interview",
-    year: 1955
+    year: 1955,
+    tags: ["Inspirational", "Motivational", "Change"]
   },
   {
     quote: "Hardships often prepare ordinary people for an extraordinary destiny.",
-    source: "C.S. Lewis"
+    source: "C.S. Lewis",
+    tags: ["Inspirational", "Motivational", "Change"]
   },
   {
     quote: "If you believe it will work out, you’ll see opportunities. If you believe it won’t, you will see obstacles.",
-    source: "Wayne Dyer"
+    source: "Wayne Dyer",
+    tags: ["Inspirational", "Motivational", "Change"]
   },
   {
     quote: "Remember that not getting what you want is sometimes a wonderful stroke of luck.",
-    source: "Dalai Lama"
+    source: "Dalai Lama",
+    tags: ["Inspirational", "Motivational", "Change"]
   },
   {
     quote: "We may encounter many defeats but we must not be defeated.",
-    source: "Maya Angelou"
+    source: "Maya Angelou",
+    tags: ["Inspirational", "Motivational", "Change"]
   }
 ];
 
@@ -47,39 +52,36 @@ function getRandomQuote() {
   return quotes[Math.floor(Math.random() * quotes.length)];
 };
 
-//getRandomQuote();
-
-
-/***
-  Create the `printQuote` function to:
-   - call the `getRandomQuote` function and assign it to a variable.
-   - use the properties of the quote object stored in the variable to
-     create your HTML string.
-   - use conditionals to make sure the optional properties exist before
-     they are added to the HTML string.
-   - set the `innerHTML` of the `quote-box` div to the HTML string.
-***/
-
+// Builds HTML String
 function printQuote() {
 
   let quoteObj = getRandomQuote();
-  let newHTML = '';
-  if (quoteObj.quote) {
-    newHTML += `<p class="quote">${quoteObj.quote}</p>`;
-  }
-  if (quoteObj.source) {
+  let newHTML = `<p class="quote">${quoteObj.quote}</p>`;
 
-    if (quoteObj.citation && quoteObj.year) {
-      newHTML += `<p class="source">${quoteObj.source}
-      <span class="citation">${quoteObj.citation}</span>
-      <span class="year">${quoteObj.year}</span>
-      </p>`;
-    }
+  newHTML += `<p class="source">${quoteObj.source}`;
+  if (quoteObj.citation) {
+    newHTML += `<span class="citation">${quoteObj.citation}</span>`;
+  }
+
+  if (quoteObj.year) {
+    newHTML += `<span class="year">${quoteObj.year}</span>`;
+  }
+
+  newHTML += `</p>`;
+
+  if (quoteObj.tags) {
+    newHTML += `<p class="tags">`;
+    newHTML += quoteObj.tags.join(', ');
+    newHTML += `</p>`;
   }
 
   console.log(newHTML);
+
+  const quoteBox = document.getElementById('quote-box');
+  quoteBox.innerHTML = newHTML;
 };
 
+document.body.style.backgroundColor = rgb(Math.floor(Math.random() * quotes.length), Math.floor(Math.random() * quotes.length), Math.floor(Math.random() * quotes.length));
 
 /***
   When the "Show another quote" button is clicked, the event listener
